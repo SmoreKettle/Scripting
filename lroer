@@ -1,0 +1,76 @@
+-- rbxassetid://id << Example for it
+
+game.Players.PlayerAdded:connect(function (Player)
+	wait(2)
+	print("Preparing the functions and other functions")
+	-- Values or var?
+	local hand = Player:GetMouse()
+	local char = Player.Character
+	
+	if Player.Character:FindFirstChild("FitFolder") == nil then
+		wait(0.05)
+		local folderfit = Instance.new("Folder") -- This is the folder where you store
+		-- Your clothes just to fit the clothing you selected
+		folderfit.Name = "FitFolder"
+		folderfit.Parent = char ---- Player's Character
+	end
+	
+	local folder = Player.Character:FindFirstChild("FitFolder") --- Storage the clothes
+													---- You're cuurrently wearing
+	
+	
+	
+	
+	
+	-------------------- Using your mouse...
+	
+	hand.Button1Down:connect(function ()
+		
+		if hand.Target.Parent:FindFirstChild("Clothing") == nil then
+			wait() --- Do nothing when not interacting T-Shirts
+			
+			
+		elseif hand.Target.Parent.Clothing.Value == 1 then
+			print(Player.name .. " selected a T-Shirt, and its value is 1")
+			
+			------ Sorts out the clothes that you're currently wearing and
+			------ replace it with the outfit... Pants won't be included since...
+			------ nudity isn't allowed...
+			
+			
+			
+			
+			local shirtz = char:GetChildren()
+			
+			for i, wear in pairs(shirtz) do
+				if wear.ClassName == "ShirtGraphic" then
+					
+					--- Identifies if the T-Shirt is the same
+					if wear.Graphic ~= hand.Target.Parent:FindFirstChildOfClass("ShirtGraphic").Graphic then
+						wait(0.05)
+						wear.Parent = folder
+						print(Player.Name .. " succesfully wore the Tryout T-Shirt")
+					end
+					
+				end
+			end
+			
+			
+			
+			----- End of the script.
+			----- This green lines are for dividing lines to avoid confusion...
+			wait(0.05)
+			local shirt = Instance.new("ShirtGraphic")
+			shirt.Name = "Tryout"
+			shirt.Graphic = hand.Target.Parent:FindFirstChildOfClass("ShirtGraphic").Graphic -- T-Shirt ID
+			-- 1189480755 for example for shirt
+			shirt.Parent = Player.Character
+			
+			
+			
+		end
+	end)
+	wait()
+	print("Eveything is succesfully loaded to " .. Player.Name)
+	warn("This will respond longer if the server was lagging. Please check your wifi speed or lower your graphics")
+end)
